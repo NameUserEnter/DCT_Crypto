@@ -1,0 +1,75 @@
+﻿<Page x:Class="DCT_Crypto.DetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:oxy="http://oxyplot.org/wpf"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DCT_Crypto" 
+      d:DataContext="{d:DesignInstance Type=local:DetailsViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="475"
+      Title="CryptoDetails" Style="{DynamicResource PageStyle}">
+
+    <Grid Background="{DynamicResource BackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Search Panel -->
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Stretch">
+            <TextBlock Text="Find Crypto:" FontSize="18" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" />
+            <ComboBox Height="30" Width="250" Margin="10,0,0,0" 
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      ItemsSource="{Binding Cryptos}"
+                      SelectedItem="{Binding SelectedCrypto}"
+                      DisplayMemberPath="Name"
+                      Style="{DynamicResource ComboBoxStyle}"/>
+        </StackPanel>
+
+        <!-- Details Panel -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Price:" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Text="{Binding SelectedCrypto.PriceUsd, StringFormat='{}{0:C}'}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource AccentColor}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Volume:" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Text="{Binding SelectedCrypto.VolumeUsd24Hr, StringFormat='{}{0:N}'}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource AccentColor}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Price Change (24hr):" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Text="{Binding SelectedCrypto.ChangePercent24Hr, StringFormat='{}{0:P}'}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource AccentColor}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Supply:" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Text="{Binding SelectedCrypto.Supply, StringFormat='{}{0:N}'}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource AccentColor}" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Symbol and Link Panel -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Symbol:" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Text="{Binding SelectedCrypto.Symbol}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource AccentColor}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Link to Site:" FontSize="17" Foreground="{DynamicResource ForegroundColor}" />
+                <TextBlock Foreground="{DynamicResource AccentColor}">
+                    <Hyperlink NavigateUri="{Binding SelectedCrypto.Explorer}" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Run Text="{Binding SelectedCrypto.Explorer}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

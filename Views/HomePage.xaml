@@ -1,0 +1,61 @@
+﻿<Page x:Class="DCT_Crypto.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DCT_Crypto" d:DataContext="{d:DesignInstance Type=local:HomePageViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="975"
+      Title="HomePage" Style="{DynamicResource PageStyle}">
+
+    <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TopCryptos}" 
+          AutoGenerateColumns="False" 
+          FontSize="14" 
+          FontWeight="SemiBold" 
+          Background="{DynamicResource BackgroundColor}" 
+          BorderBrush="{DynamicResource BorderColor}" 
+          BorderThickness="1"
+          VerticalAlignment="Stretch" 
+          HorizontalAlignment="Stretch"
+          RowHeight="35" 
+          ColumnHeaderHeight="40" 
+          GridLinesVisibility="None" 
+          HeadersVisibility="Column"
+          RowBackground="{DynamicResource PrimaryColor}"
+          AlternatingRowBackground="{DynamicResource SecondaryColor}" 
+          HorizontalGridLinesBrush="{DynamicResource BorderColor}"
+          VerticalGridLinesBrush="{DynamicResource BorderColor}">
+
+        <DataGrid.Resources>
+            <!-- Style for DataGrid column headers -->
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="40"/>
+            </Style>
+
+            <!-- Style for DataGrid rows -->
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="{DynamicResource RowBackgroundColor}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource HoverBackgroundColor}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.Resources>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="Auto" />
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto" />
+            <DataGridTextColumn Header="Price in $" Binding="{Binding PriceUsd, StringFormat='{}{0:C}'}" Width="Auto" />
+            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapUsd, StringFormat='{}{0:C}'}" Width="Auto" />
+        </DataGrid.Columns>
+    </DataGrid>
+
+</Page>
